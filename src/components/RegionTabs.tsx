@@ -14,7 +14,6 @@ import { useUserRegions } from '@/hooks/useUserRegions'
 import { IUser, Region } from '@/types'
 import { QueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
 
 interface RegionTabsProps {
   user: IUser
@@ -86,7 +85,6 @@ export function RegionTabs({
             <RegionsMap
               regions={userRegions}
               onEdit={onEdit}
-              user={user}
               onDelete={onDelete}
               isDeleting={isDeleting}
             />
@@ -161,7 +159,6 @@ export function RegionTabs({
               />
               <div className="h-[400px] mt-4">
                 <RegionsMap
-                  user={user}
                   regions={pointRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}
@@ -248,7 +245,6 @@ export function RegionTabs({
               <RegionsTable regions={nearbyRegions} />
               <div className="h-[400px] mt-4">
                 <RegionsMap
-                  user={user}
                   regions={nearbyRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}
