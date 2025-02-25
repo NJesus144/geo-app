@@ -1,10 +1,11 @@
 'use client'
+
 import L from 'leaflet'
 import 'leaflet-draw/dist/leaflet.draw.css'
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useRef } from 'react'
-import { MapContainer, TileLayer } from 'react-leaflet'
 import { DrawControl } from './DrawControl'
+import { MapContainer, TileLayer } from 'react-leaflet'
 
 interface MapComponentProps {
   onPolygonCreated: (coordinates: number[][][]) => void

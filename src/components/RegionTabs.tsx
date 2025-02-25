@@ -1,6 +1,6 @@
 import { CreateRegionDialog } from '@/components/CreateRegionDialog'
 import { RegionsTable } from '@/components/RegionsTable'
-import RegionsMap from '@/components/map/RegionsMap'
+import RegionsMapWrapper from '@/components/map/MapRegionsWrapper'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -66,11 +66,17 @@ export function RegionTabs({
 
   return (
     <Tabs defaultValue="my-regions" className="w-full h-full">
-      <TabsList className="flex gap-4 w-full">
-        <TabsTrigger value="my-regions">Minhas Regiões</TabsTrigger>
-        <TabsTrigger value="all-regions">Todas as Regiões</TabsTrigger>
-        <TabsTrigger value="point-search">Buscar por ponto</TabsTrigger>
-        <TabsTrigger value="nearby-search">Buscar nas proximidades</TabsTrigger>
+      <TabsList className="flex gap-4 w-full flex-col mb-10 h-20 md:flex-row">
+        <div className='flex'>
+          <TabsTrigger value="my-regions">Minhas Regiões</TabsTrigger>
+          <TabsTrigger value="all-regions">Todas as Regiões</TabsTrigger>
+        </div>
+        <div className='flex'>
+          <TabsTrigger value="point-search">Buscar por ponto</TabsTrigger>
+          <TabsTrigger value="nearby-search">
+            Buscar nas proximidades
+          </TabsTrigger>
+        </div>
       </TabsList>
 
       <TabsContent value="my-regions">
@@ -82,7 +88,7 @@ export function RegionTabs({
               onEdit={onEdit}
               onDelete={onDelete}
             />
-            <RegionsMap
+            <RegionsMapWrapper
               regions={userRegions}
               onEdit={onEdit}
               onDelete={onDelete}
@@ -158,7 +164,7 @@ export function RegionTabs({
                 onDelete={onDelete}
               />
               <div className="h-[400px] mt-4">
-                <RegionsMap
+                <RegionsMapWrapper
                   regions={pointRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}
@@ -244,7 +250,7 @@ export function RegionTabs({
             <div className="mt-6">
               <RegionsTable regions={nearbyRegions} />
               <div className="h-[400px] mt-4">
-                <RegionsMap
+                <RegionsMapWrapper
                   regions={nearbyRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}

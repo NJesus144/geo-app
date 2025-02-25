@@ -1,6 +1,6 @@
 'use client'
 
-import { ClientMap } from '@/components/map/ClientMap'
+import MapComponentWrapper from '@/components/map/MapComponentWrapper'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/hooks/use-toast'
@@ -71,8 +71,8 @@ export function CreateRegionForm({
       queryClient.invalidateQueries({ queryKey: ['regions'] })
       toast({
         title: `Região ${
-          mode === Mode.EDIT ? 'Atualizado!' : 'Criado!'
-        } "com sucesso!"}`,
+          mode === Mode.EDIT ? 'atualizada' : 'criada'
+        } com sucesso!`,
       })
       form.reset()
       onSuccess?.()
@@ -101,7 +101,7 @@ export function CreateRegionForm({
         )}
       </div>
 
-      <ClientMap onPolygonCreated={handlePolygonCreated} />
+      <MapComponentWrapper onPolygonCreated={handlePolygonCreated} />
 
       {form.formState.errors.polygon && (
         <span className="text-sm text-destructive">Desenhar um polígono</span>

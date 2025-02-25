@@ -4,24 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Region } from '@/types'
 import L from 'leaflet'
 import { Edit, Trash2 } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
-
-// Dynamic imports for Leaflet components
-const MapContainer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.MapContainer),
-  { ssr: false },
-)
-
-const TileLayer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.TileLayer),
-  { ssr: false },
-)
-
-const Polygon = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Polygon),
-  { ssr: false },
-)
+import { MapContainer, Polygon, TileLayer } from 'react-leaflet'
 
 interface RegionsMapProps {
   regions: Region[]
@@ -57,7 +41,7 @@ export default function RegionsMap({
       : [2.1686, 41.3874] // São Paulo as default
 
   return (
-    <div className="w-full h-[500px] relative">
+    <div className="w-full h-[400px] relative">
       <MapContainer
         center={[center[1], center[0]]}
         zoom={12}

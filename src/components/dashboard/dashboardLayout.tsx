@@ -68,19 +68,17 @@ export const DashboardLayout = ({
                 <div className="flex flex-col gap-2 pt-4">
                   <UpdateUserDialog />
                   <DeleteConfirmationDialog
-                    title={t('deleteConfirmationUserDialog.title')}
-                    description={t('deleteConfirmationUserDialog.description')}
-                    cancelText={t('buttons.cancel')}
+                    title="Deletar Conta"
+                    description="Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita."
+                    cancelText="Cancelar"
                     trigger={
                       <Button variant="destructive">
-                        {t('deleteConfirmationUserDialog.deleteAccount')}
+                        Excluir Conta
                       </Button>
                     }
                     isDeleting={deleteMutation.isPending}
                     onConfirm={() => deleteMutation.mutate()}
-                    confirmText={t(
-                      'deleteConfirmationUserDialog.confirmationButton',
-                    )}
+                    confirmText="Sim, excluir"
                   />
                 </div>
               </CardContent>
