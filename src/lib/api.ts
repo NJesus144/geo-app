@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from '@/store/auth'
 
 export const api = axios.create({
-  baseURL: 'https://api-ozmap.onrender.com/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 })
 
 api.interceptors.request.use((config) => {

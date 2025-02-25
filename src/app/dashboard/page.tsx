@@ -7,17 +7,23 @@ import { useDeleteRegion } from '@/hooks/useDeleteRegion'
 import { useAuthStore } from '@/store/auth'
 import { Region } from '@/types'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function DashboardPage() {
-  const { user } = useAuthStore()
+  const { user, isLoading, setLoading } = useAuthStore()
   const router = useRouter()
   const { mutate: deleteRegion, isPending: isDeleting } = useDeleteRegion()
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null)
   const [isEditOpen, setIsEditOpen] = useState(false)
 
-  if (!user) {
-    return router.push('/login')
+  useEffect(() => {
+    if (isLoading && user !== null) {
+      setLoading(false)
+    }
+  }, [user, isLoading, router, setLoading])
+
+  if (isLoading) {
+    return <div>Carregando...</div>
   }
 
   const handleEdit = (region: Region) => {
@@ -32,12 +38,14 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="p-6">
-        <RegionTabs
-          user={user}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          isDeleting={isDeleting}
-        />
+        {user && (
+          <RegionTabs
+            user={user}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            isDeleting={isDeleting}
+          />
+        )}
       </div>
       <EditRegionDialog
         region={selectedRegion}
