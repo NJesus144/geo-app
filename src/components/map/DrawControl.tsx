@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect } from 'react'
 import L from 'leaflet'
 import { FeatureGroup, useMap } from 'react-leaflet'

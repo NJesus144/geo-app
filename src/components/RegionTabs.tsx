@@ -67,11 +67,11 @@ export function RegionTabs({
   return (
     <Tabs defaultValue="my-regions" className="w-full h-full">
       <TabsList className="flex gap-4 w-full flex-col mb-10 h-20 md:flex-row">
-        <div className='flex'>
+        <div className="flex">
           <TabsTrigger value="my-regions">Minhas Regiões</TabsTrigger>
           <TabsTrigger value="all-regions">Todas as Regiões</TabsTrigger>
         </div>
-        <div className='flex'>
+        <div className="flex">
           <TabsTrigger value="point-search">Buscar por ponto</TabsTrigger>
           <TabsTrigger value="nearby-search">
             Buscar nas proximidades
@@ -89,6 +89,7 @@ export function RegionTabs({
               onDelete={onDelete}
             />
             <RegionsMapWrapper
+              user={user}
               regions={userRegions}
               onEdit={onEdit}
               onDelete={onDelete}
@@ -165,6 +166,7 @@ export function RegionTabs({
               />
               <div className="h-[400px] mt-4">
                 <RegionsMapWrapper
+                  user={user}
                   regions={pointRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}
@@ -251,6 +253,7 @@ export function RegionTabs({
               <RegionsTable regions={nearbyRegions} />
               <div className="h-[400px] mt-4">
                 <RegionsMapWrapper
+                  user={user}
                   regions={nearbyRegions}
                   onEdit={onEdit}
                   onDelete={onDelete}

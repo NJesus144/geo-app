@@ -1,7 +1,7 @@
 'use client'
 
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Region } from '@/types'
+import { IUser, Region } from '@/types'
 import 'leaflet/dist/leaflet.css'
 
 interface RegionsMapProps {
@@ -9,6 +9,7 @@ interface RegionsMapProps {
   onEdit: (region: Region) => void
   onDelete: (region: Region) => void
   isDeleting: boolean
+  user: IUser
 }
 
 const RegionsMapWrapper: FunctionComponent<RegionsMapProps> = (props) => {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DeleteConfirmationDialog } from '@/components/ConfirmationModal'
 import { Button } from '@/components/ui/button'
-import { Region } from '@/types'
+import { IUser, Region } from '@/types'
 import L from 'leaflet'
 import { Edit, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -12,6 +12,7 @@ interface RegionsMapProps {
   onEdit: (region: Region) => void
   onDelete: (region: Region) => void
   isDeleting: boolean
+  user: IUser
 }
 
 export default function RegionsMap({
@@ -19,6 +20,7 @@ export default function RegionsMap({
   onEdit,
   onDelete,
   isDeleting,
+  user,
 }: RegionsMapProps) {
   const [isMounted, setIsMounted] = useState(false)
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null)
@@ -75,34 +77,36 @@ export default function RegionsMap({
       {selectedRegion && (
         <div className="absolute top-4 right-4 z-[1000] bg-white rounded-lg shadow-lg p-4">
           <h3 className="font-medium mb-2">{selectedRegion.name}</h3>
-          <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                onEdit(selectedRegion)
-                setSelectedRegion(null)
-              }}
-            >
-              <Edit className="w-4 h-4 mr-1" />
-              Editar
-            </Button>
-            <DeleteConfirmationDialog
-              title="Excluir região"
-              description={`Tem certeza que deseja excluir a região "${selectedRegion.name}"? Esta ação não pode ser desfeita.`}
-              trigger={
-                <Button size="sm" variant="destructive">
-                  <Trash2 className="w-4 h-4 mr-1" />
-                  Excluir
-                </Button>
-              }
-              isDeleting={isDeleting}
-              onConfirm={() => {
-                onDelete(selectedRegion)
-                setSelectedRegion(null)
-              }}
-            />
-          </div>
+          {selectedRegion.user._id === user._id && (
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  onEdit(selectedRegion)
+                  setSelectedRegion(null)
+                }}
+              >
+                <Edit className="w-4 h-4 mr-1" />
+                Editar
+              </Button>
+              <DeleteConfirmationDialog
+                title="Excluir região"
+                description={`Tem certeza que deseja excluir a região "${selectedRegion.name}"? Esta ação não pode ser desfeita.`}
+                trigger={
+                  <Button size="sm" variant="destructive">
+                    <Trash2 className="w-4 h-4 mr-1" />
+                    Excluir
+                  </Button>
+                }
+                isDeleting={isDeleting}
+                onConfirm={() => {
+                  onDelete(selectedRegion)
+                  setSelectedRegion(null)
+                }}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
